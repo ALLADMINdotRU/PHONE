@@ -11,6 +11,6 @@ routerMySQL.get("/connect",                         сontrollerMySQL.connect);
 routerMySQL.get("/test",                            сontrollerMySQL.test);
 
 routerMySQL.get("/config",                          сontrollerMySQLconfig.config);
-routerMySQL.get("/postMySQLconfigsave",             сontrollerMySQLconfig.postMySQLconfigsave);
+routerMySQL.get("/postMySQLconfigSave",             сontrollerMySQLconfig.postMySQLconfigSave);
 
 module.exports = routerMySQL;  //делаем доступным наш результат снаружи

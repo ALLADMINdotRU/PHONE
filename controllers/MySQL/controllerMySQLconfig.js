@@ -4,7 +4,7 @@ exports.config = function(request, response){
     response.render("./MySQL/viewMySQLconfig.hbs");          //отправка ответа
 };
 
-exports.postMySQLconfigsave = function(request, response){
+exports.postMySQLconfigSave = function(request, response){
     fs.writeFileSync("./config/MySQLconfig.txt", "Привет ми ми ми!") ;      //
 
     console.log("Тут был код");
