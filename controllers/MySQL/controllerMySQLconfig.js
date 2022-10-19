@@ -5,8 +5,8 @@ exports.config = function(request, response){
 };
 
 exports.postMySQLconfigSave = function(request, response){
-    fs.writeFileSync("./config/MySQLconfig.txt", "Привет ми ми ми!") ;      //
+    fs.writeFileSync("./config/MySQLconfig.txt", "Hello world") ;      //
 
-    console.log("Тут был код");
-    response.send("О сайте");
+    console.log("Here was the code");
+    response.send("About the site");
 };
