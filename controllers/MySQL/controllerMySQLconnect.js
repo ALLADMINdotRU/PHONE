@@ -1,14 +1,4 @@
-const mysql = require("mysql2");
-const PathConfigFile = "./config/config.json";
-const fs = require("fs");       //модуль работы с файлами
-
-
-exports.error = function(request, response){
-    response.render("./MySQL/viewMySQLerr.hbs");          //отправка ответа
-    //console.log(err.message);
-};
-
-exports.connect = function(request, response){
+connect = function(request, response){
     let varErrDB = false;   //указывает есть ли ошибка по имени БД
     let varDBname = "";     //имя БД
     let varErrLogin = false;
@@ -61,6 +51,4 @@ exports.connect = function(request, response){
     });  
 };
 
-exports.test = function(){
-    console.log("sdfasdfads");
-}
+module.exports = connect; //делаем доступным наш результат снаружи

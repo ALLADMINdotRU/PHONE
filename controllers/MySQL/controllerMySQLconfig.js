@@ -26,9 +26,10 @@ exports.postMySQLconfigSave = function(request, response) {
         console.log("not MySQL config");
     };    
     
-    configData.MySQL.IpAddress = request.body.IPaddressMySQL;
-    configData.MySQL.Login = request.body.LoginMySQL;
-    configData.MySQL.Password = request.body.PasswordMySQL;    
+    configData.MySQL.IpAddress =    request.body.IPaddressMySQL;
+    configData.MySQL.Login =        request.body.LoginMySQL;
+    configData.MySQL.Password =     request.body.PasswordMySQL;    
+    configData.MySQL.Database =     request.body.DatabaseMySQL;
 
     jsonFile =JSON.stringify(configData);
 
