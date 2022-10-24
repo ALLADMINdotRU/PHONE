@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Connect config</h1>
-     <form action="postMySQLconfigSave" method="POST">
+     <form action="saveconfig" method="POST">
         <label>IP server address</label>
         <input name="IPaddressMySQL" /><br><br>
         <label>Login</label>
@@ -15,6 +15,8 @@
         <input name="PasswordMySQL" /><br><br>
         <label>Database</label>
         <input name="DatabaseMySQL" /><br><br>
+        <label>Port</label>
+        <input name="PortMySQL" /><br><br>
         
         <input type="submit" value="Save" />
      </form>

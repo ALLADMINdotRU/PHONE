@@ -1,1 +1,1 @@
-{"MySQL":{"IpAddress":"127.0.0.1","Login":"testuser","Password":"12345678","Database":"phone_db"}}
+{"MySQL":{"IpAddress":"127.0.0.1","Login":"testuser","Password":"12345678","Database":"phone_db3","Port":"3306"}}

@@ -9,6 +9,7 @@ routerMySQL.use("/connect",                         сontrollerMySQL.connect);
 routerMySQL.use("/test",                            сontrollerMySQL.test);
 
 routerMySQL.use("/config",                          сontrollerMySQLconfig.config);
-routerMySQL.use("/postMySQLconfigSave",             сontrollerMySQLconfig.postMySQLconfigSave);
+routerMySQL.use("/saveconfig",                      сontrollerMySQLconfig.postMySQLconfigSave);
+routerMySQL.use("/createdb",                        сontrollerMySQLconfig.createdb);
 
 module.exports = routerMySQL;  //making our result available outside

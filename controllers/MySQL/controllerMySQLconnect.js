@@ -1,4 +1,8 @@
-connect = function(request, response){
+const mysql = require("mysql2");
+const PathConfigFile = "./config/config.json";
+const fs = require("fs");       //модуль работы с файлами
+
+const connect = function(request, response, queryCallback, dbexist) {
     let varErrDB = false;   //указывает есть ли ошибка по имени БД
     let varDBname = "";     //имя БД
     let varErrLogin = false;
@@ -9,22 +13,30 @@ connect = function(request, response){
         jsonFile = fs.readFileSync(PathConfigFile, "utf8"); //read all files with config by JSON
         configData = JSON.parse(jsonFile);                  //conver to JS format 
 
-        connection = mysql.createConnection({     //connect to MySQL
-            host: configData.MySQL.IpAddress,
-            user: configData.MySQL.Login,
-            database: configData.MySQL.Database,
-            password: configData.MySQL.Password
-          }); 
+        if (dbexist){
+            connection = mysql.createConnection({     //connect to MySQL если есть база данных
+                host: configData.MySQL.IpAddress,
+                user: configData.MySQL.Login,
+                database: configData.MySQL.Database,
+                password: configData.MySQL.Password,
+                port: configData.MySQL.Port
+              }); 
+        } else {
+            connection = mysql.createConnection({     //connect to MySQL если нету базы данных
+                host: configData.MySQL.IpAddress,
+                user: configData.MySQL.Login,
+                //database: configData.MySQL.Database,
+                password: configData.MySQL.Password,
+                port: configData.MySQL.Port
+              }); 
+        }
+
     } else {        
         console.log("file not exist: " + PathConfigFile);      
-    };
-    
-    connection.connect(function(err){
-        if (err) {        
-            //return console.error("Ошибка: " + err.message +" "+ connection.config.database+" "+err.code);
-            //response.send({name: "Vasya", foto: "photo.jpeg", city: "Nsk"});
-            //let param = JSON.stringify({name: "ALexander", array: [1,2,3], obj: { a: 1, b: 2}});
-            //response.redirect(`/mysql/error?msg=${param}` );
+    };    
+
+     connection.connect((err) => {
+        if (err) {      
             if(err.code == "ER_BAD_DB_ERROR"){ //если ошибка что не существует БД                
                 console.log("Error: connect to DB - not correct DataBase name");    //выводим в консоль сообщение что не верное имя БД 
                 varErrDB = true;    //указываем что проблема в базе данных        
@@ -34,7 +46,6 @@ connect = function(request, response){
                 console.log("Error: connect to DB - not correct Login or Passwordme");
                 varErrLogin = true; //указываем что не верный логин или пароль
             }
-
         response.render("./MySQL/viewMySQLerr.hbs",{  //отправляем пользователю страницу с описание ошибки почему мы не можем подключиться к БД
             errDB:      varErrDB,
             errLogin:   varErrLogin,
@@ -46,9 +57,10 @@ connect = function(request, response){
         console.log(err.code);
         }
         else{   //если подключение к БД прошло успешно
-            console.log("Connect to MySQL sever is succefull");
+            console.log("Connect to MySQL sever is succefull"); 
+            if (queryCallback !== undefined) {queryCallback(connection)};  //если калбэк не пустой то возращаем результат
         }
-    });  
+    });      
 };
 
 module.exports = connect; //делаем доступным наш результат снаружи
