@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuring a LDAP database connection</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Connect config LDAP server</h1>
+     <form action="/ldap/saveconfig" method="POST">
+        <label>IP server address</label>
+        <input name="IPaddressLDAP" /><br><br>
+        <label>Login</label>
+        <input name="LoginLDAP" /><br><br>
+        <label>Password</label>
+        <input name="PasswordLDAP" /><br><br>
+        <label>Filter</label>
+        <input name="FilterLDAP" /><br><br>
+        <label>Port</label>
+        <input name="PortLDAP" /><br><br>
+        <label>Search Folder</label>
+        <input name="FolderLDAP" /><br><br>
+
+        <input type="submit" value="Save" />
+     </form>
+     <a href="/users">Back to user list</a>
+</body>
+<html>

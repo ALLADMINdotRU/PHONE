@@ -1,1 +1,17 @@
-{"MySQL":{"IpAddress":"127.0.0.1","Login":"testuser","Password":"12345678","Database":"phone_db3","Port":"3306"}}
+{
+    "MySQL": {
+        "IpAddress": "127.0.0.1",
+        "Login": "testuser",
+        "Password": "12345678",
+        "Database": "phone_db0",
+        "Port": "3306"
+    },
+    "LDAP": {
+        "IpAddress": "172.16.0.10",
+        "Login": "CN=Scan,OU=Services,OU=Users,OU=Accounts,DC=rb,DC=local",
+        "Password": "q123456",
+        "Filter": "(objectClass=*)",
+        "Port": "389",
+        "Folder": "OU=Отдел системных администраторов,OU=Унискан,OU=Users,OU=Accounts,DC=rb,DC=local"
+    }
+}

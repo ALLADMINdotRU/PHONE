@@ -8,8 +8,10 @@ app.use(express.urlencoded({ extended: false }));   //для получения 
 const userRouter = require("./routes/userRouter.js");
 const homeRouter = require("./routes/homeRouter.js");
 const routeMySQL = require("./routes/MySQL/routerMySQL.js");    //подклчем роуты для MySQL
+const routeLDAP  = require("./routes/LDAP/routerLDAP.js");    //подклчем роуты для LDAP
 
 app.use("/mysql",routeMySQL);  
+app.use("/ldap",routeLDAP);  
 app.use("/users", userRouter);          //use обозначает что тут будет применяться метод
 app.use("/", homeRouter);
  

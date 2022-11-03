@@ -2,11 +2,11 @@ const fs = require("fs");       //модуль работы с файлами
 const PathConfigFile = "./config/config.json";
 const MySQLsession = require("./controllerMySQLconnect.js");
 
-exports.config = function(request, response){
+config = function(request, response){
     response.render("./MySQL/viewMySQLconfigConnect.hbs");          //отправка ответа
 };
 
-exports.postMySQLconfigSave = function(request, response) {
+postMySQLconfigSave = function(request, response) {
     let jsonFile;
     let configData;    
 
@@ -51,11 +51,45 @@ exports.postMySQLconfigSave = function(request, response) {
 };
 
 
-exports.createdb = function(request, response){
+
+
+createdb = function(request, response){
     queryCallback = function(connection) {   //запрос в калбэк
         let sql = "CREATE DATABASE " + request.body.DatabaseMySQL +";";        //тут содержится sql запрос создаем БД
-        console.log(request.body.DatabaseMySQL);
-        console.log(sql);
+        connection.query(sql, function(err, results) {      //делаем уже запрос и получаем ответ результат отправляем в прорисовку
+            if(err){
+                return console.log(err);        //если во время исполнения sql запроса возникла ошибка, выводим ее в консоль
+            } else {                                //если запрос выполнился хорошо . то делаем следующее действие
+                createtables(request, response);
+            };
+        });
+
+        connection.end(function(err) {
+            if (err) {
+            return console.log("Error closing MySQL session: " + err.message);
+            }
+            console.log("MySQL session is closse");
+        });  
+    
+    };
+    MySQLsession(request, response, queryCallback, false) ;
+};
+
+
+createtables = function(request, response){
+    queryCallback = function(connection) {   //запрос в калбэк
+        let sql = 
+        "CREATE TABLE users ( "+
+            "ID INT(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, "+
+            "objectguid VARCHAR(50) NOT NULL DEFAULT '', "+
+            "fio VARCHAR(150) NOT NULL DEFAULT '', "+
+            "email VARCHAR(50) NOT NULL DEFAULT '' , "+
+            "phone VARCHAR(50) NOT NULL DEFAULT '' , "+
+            "mobile VARCHAR(50) NOT NULL DEFAULT '' , "+
+            "position VARCHAR(50) NOT NULL DEFAULT '' , "+
+            "department VARCHAR(50) NOT NULL DEFAULT '' , "+
+            "room VARCHAR(5) NOT NULL DEFAULT '' );"//тут содержится sql запрос создаем БД
+
         connection.query(sql, function(err, results) {      //делаем уже запрос и получаем ответ результат отправляем в прорисовку
             if(err){
                 return console.log(err);        //если во время исполнения sql запроса возникла ошибка, выводим ее в консоль
@@ -74,5 +108,10 @@ exports.createdb = function(request, response){
       });  
     
     };
-    MySQLsession(request, response, queryCallback, false) ;
-}
+    MySQLsession(request, response, queryCallback, true) ;
+};
+
+module.exports.createdb                 = createdb;
+module.exports.createtables             = createtables;
+module.exports.postMySQLconfigSave      = postMySQLconfigSave
+module.exports.config                   = config;

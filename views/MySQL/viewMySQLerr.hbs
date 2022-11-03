@@ -10,7 +10,7 @@
     <h1>Ошибка подключения к БД</h1>
 
     {{#if errDB}}
-    <form action="createdb" method="POST">
+    <form action="/mysql/createdb" method="POST">
         <p>Ошибка подключения к базе данных</p>
         <p>не верное имя базы данны:"{{DBname}}"</p>
         <input type="hidden" name="DatabaseMySQL" value="{{DBname}}"" >

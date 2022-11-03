@@ -18,8 +18,7 @@ exports.postShowUsers = function(request, response){ //подключаемся 
           return console.log("Error closing MySQL session: " + err.message);
         }
         console.log("MySQL session is closse");
-      });  
-    
+      });     
     };
-    MySQLsession(request, response, queryCallback) ;
+    MySQLsession(request, response, queryCallback, true) ;
 };
